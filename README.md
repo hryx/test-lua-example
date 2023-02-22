@@ -1,18 +1,8 @@
 Example Lua extension with a single function
 
-This is the `simple` branch in which all files are self contained.
+This is the `pkg` branch which only contains the Zig package with Lua API wrapper in a module.
 Other branches:
-- `pkg`: only contains Zig package with Lua API wrapper in a Zig module
-- `use-pkg`: contains this extension and uses the above as a dependency
+- `use-pkg`: Lua extension which uses this package as a dependency
+- `simple`: self-contained version with no package management
 
-Usage:
-
-```
-$ zig build
-$ lua
-Lua 5.4.4  Copyright (C) 1994-2022 Lua.org, PUC-Rio
-> package.cpath = "zig-out/lib/lib?.dylib;zig-out/lib/lib?.so;zig-out/lib/?.dll"
-> corncob = require("corncob")
-> corncob.chomp(44)
-440.0
-```
+Usage: switch to the `use-pkg` branch and see readme

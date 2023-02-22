@@ -1,0 +1,5 @@
+.{
+    .name = "lua",
+    .description = "Example wrapper for the Lua 5.4 API (demonstration only)",
+    .version = "0.0.0",
+}
