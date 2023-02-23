@@ -4,10 +4,9 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    // Uses cImport, but no way to add include path to a module...
-    b.addModule(.{
-        .name = "lua",
-        .source_file = .{ .path = "lua/lua.zig" },
+    const lua_dep = b.dependency("lua", .{
+        .target = target,
+        .optimize = optimize,
     });
     const lib = b.addSharedLibrary(.{
         .name = "corncob",
@@ -15,9 +14,17 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    // ...so we have to add the include path to the lib which uses the module
-    lib.addIncludePath("lua/include");
-    lib.addModule("lua", b.modules.get("lua").?);
+    lib.addModule("lua", lua_dep.module("lua"));
+    // The module uses cImport, but there is no way to add include path to a module,
+    // so we have to add the include path to the lib which uses the module.
+    // The path is relative to the locally cached version of the package.
+    const path = b.global_cache_root.join(b.allocator, &.{
+        "p",
+        "122055c92fa2b54a9d244645687f4675efcbf95129f90d97ff646d6f878844472888",
+        "lua",
+        "include",
+    }) catch unreachable;
+    lib.addIncludePath(path);
     // Symbols resolved at load time by Lua
     lib.linker_allow_shlib_undefined = true;
     lib.install();

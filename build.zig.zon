@@ -1,0 +1,11 @@
+.{
+    .name = "corncob",
+    .description = "Example Lua extension using a remote dependency",
+    .version = "0.0.0",
+    .dependencies = .{
+        .lua = .{
+            .url = "https://github.com/hryx/test-lua-extension/archive/035191ac225a185f26d402dc6d0d1fac99b4e2e7.tar.gz",
+            .hash = "122055c92fa2b54a9d244645687f4675efcbf95129f90d97ff646d6f878844472888",
+        },
+    },
+}

@@ -1,9 +1,9 @@
 Example Lua extension with a single function
 
-This is the `simple` branch in which all files are self contained.
+This is the `use-pkg` branch which depends on the remote package defined in `pkg`.
 Other branches:
-- `pkg`: only contains Zig package with Lua API wrapper in a Zig module
-- `use-pkg`: contains this extension and uses the above as a dependency
+- `pkg`: only contains the Zig package which this branch depends on
+- `simple`: self-contained version with no package management
 
 Usage:
 
