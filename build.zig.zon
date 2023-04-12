@@ -4,8 +4,8 @@
     .version = "0.0.0",
     .dependencies = .{
         .lua = .{
-            .url = "https://github.com/hryx/test-lua-extension/archive/035191ac225a185f26d402dc6d0d1fac99b4e2e7.tar.gz",
-            .hash = "122055c92fa2b54a9d244645687f4675efcbf95129f90d97ff646d6f878844472888",
+            .url = "https://github.com/hryx/test-lua-extension/archive/d1211db54e84c3a2bf01b141b4fb2affdbdafad0.tar.gz",
+            .hash = "122030407cd43ccf4d0fdf2454ff784b85a1a30a9231506a4b9635e3203c1b893e02",
         },
     },
 }
