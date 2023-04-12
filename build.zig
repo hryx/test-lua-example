@@ -5,8 +5,7 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     // Uses cImport, but no way to add include path to a module...
-    b.addModule(.{
-        .name = "lua",
+    const mod = b.addModule("lua", .{
         .source_file = .{ .path = "lua/lua.zig" },
     });
     const lib = b.addSharedLibrary(.{
@@ -17,8 +16,9 @@ pub fn build(b: *std.Build) void {
     });
     // ...so we have to add the include path to the lib which uses the module
     lib.addIncludePath("lua/include");
-    lib.addModule("lua", b.modules.get("lua").?);
+    lib.addModule("lua", mod);
     // Symbols resolved at load time by Lua
     lib.linker_allow_shlib_undefined = true;
-    lib.install();
+    lib.linkLibC();
+    b.installArtifact(lib);
 }
